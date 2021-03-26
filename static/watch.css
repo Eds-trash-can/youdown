@@ -1,0 +1,128 @@
+.videoplayer-container {
+    background-color: green;
+}
+@media only screen and (min-width: 930px) { /* Vertical video player */
+    .videoplayer-container {
+        position: absolute;
+        top: 1em;
+        left: 1em;
+        width: calc(100% - 4em);
+    }
+    .videoplayer-controlls {
+        position: absolute;
+        bottom: 0;
+        height: 3em;
+        width: 100%;
+        background-color: #ffffff11;
+    }
+}
+@media only screen and (min-width: 1200px) { /* Three vids */
+    .recomendations-container {
+    width: 68em;
+    }
+}
+@media only screen and (min-width: 1070px) { /* Four vids */
+    .recomendations-container {
+        width: 90em;
+    }
+}
+.main-area-container {
+    width: 100%;
+    left: 0;
+    top: 3em;
+}
+.play {
+    position: absolute;
+    bottom: 0.25em;
+    left: 1em;
+    height: 2.2em;
+    width: 2.2em;
+}
+.play-img {
+    height: 100%;
+    width: 100%;
+}
+.skip-next {
+    position: absolute;
+    bottom: .25em;
+    left: 3.5em;
+    height: 2.2em;
+    width: 2.2em;
+}
+.skip-next-img {
+    height: 100%;
+    height: 100%;
+}
+.timetxt {
+    position: absolute;
+    height: 1em;
+    left: 6em;
+    bottom: .8em;
+}
+.timetxt-content {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    height: 100%;
+    width: 100%;
+}
+.timebar {
+    position: absolute;
+    top: .2em;
+    left: 1em;
+    height: .2em;
+    background-color: #ffffff6e;
+    width: calc(100% - 2em);
+}
+.timebar-progress {
+    position: absolute;
+    height: 100%;
+    background-color: red;
+    left: 0;
+    top: 0;
+    width: 0%;
+}
+.fullscreen-toggle {
+    position: absolute;
+    height: 2em;
+    width: 2em;
+    top: 0.5em;
+    right: 1em;
+}
+.fullscreen-toggle-img {
+    height: 100%;
+    width: 100%;
+}
+.pip-activate {
+    position: absolute;
+    height: 1.8em;
+    width: 2.2em;
+    top: 0.6em;
+    right: 3.2em;
+}
+.pip-symbol {
+    height: 100%;
+    width: 100%;
+}
+.settings {
+    position: absolute;
+    height: 1.8em;
+    width: 1.8em;
+    top: 0.6em;
+    right: 5.6em;
+}
+.settings-img {
+    height: 100%;
+    width: 100%;
+}
+.cc {
+    position: absolute;
+    height: 1.8em;
+    width: 1.8em;
+    top: 0.6em;
+    right: 7.9em;
+    top: 0.6em;
+}
+.cc-img {
+    height: 100%;
+    width: 100%;
+}

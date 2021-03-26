@@ -1,0 +1,87 @@
+
+.recomendations-container {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff
+}
+@media only screen and (min-width: 930px) { /* Two vids | Vertical video player */
+    .recomendations-container {
+    width: 45em;
+    }
+}
+@media only screen and (min-width: 1200px) { /* Three vids */
+    .recomendations-container {
+    width: 68em;
+    }
+}
+@media only screen and (min-width: 1070px) { /* Four vids */
+    .recomendations-container {
+        width: 90em;
+    }
+}
+.video-container {
+    position: absolute;
+    height: 20em;
+    width: 22em;
+    margin: 0;
+    
+}
+.thumbnail-container {
+    height: 12.375em;
+    width: 100%;
+    background-color: #909090;
+}
+.thumbnail-picture {
+    height: 100%;
+    width: 100%;
+}
+.video-info {
+    position: absolute;
+    height: 7.625;
+    width: 100%
+    
+}
+.video-info-channel-icon-container {
+    height: 2.5em;
+    width: 2.5em;
+    margin: 0;
+    margin-top: 1em;
+    border-radius: 50%;
+    background-color:green;
+    border-width: 0;
+    border-color: #ffffff00;
+}
+.video-info-channel-icon {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background-color:green;
+    border-width: 0;
+    border-color: #ffffff00;
+}
+.video-info-title-container {
+    position: absolute;
+    top: 1em;
+    left: 3.5em;
+    height: 3em;
+    width: 15.5em;
+    margin: 0;
+}
+.video-info-title {
+    color:#ffffff;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+.video-info-channel-container {
+    position: absolute;
+    margin-top: 0.8em;
+    left: 3.5em;
+}
+.video-info-channel {
+    color: #666666
+}
+.video-row {
+    position: absolute;
+    height: 21em;
+    background-color:red;
+}
