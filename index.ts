@@ -50,8 +50,8 @@ app.get('/channel-api/:channel', (req, res) => {get_channel(req, res)})
 app.get('/video-api/:videoid', (req, res) => {get_video(req, res)})
 
 app.get('/img/:file', (req, res) => {
-    console.log(`[${req.ip}|0/0] img at: ./storadge/img/${req.params.file}.png`)
-    fs.readFile(`./storadge/img/${req.params.file}.png`, function(err, data) {
+    console.log(`[${req.ip}|0/0] img at: ./storadge/img/${req.params.file}`)
+    fs.readFile(`./storadge/img/${req.params.file}`, function(err, data) {
         if(err) {
             res.status(404);
             fs.readFile('./static/404.jpeg', (err, data) => {
@@ -69,6 +69,18 @@ app.get('/img/:file', (req, res) => {
         }
     }); 
 })
+app.get('/vid/:file', function(req, res) {
+    fs.readFile(`./storadge/vid/${req.params.file}.mp4`, function(err, data) {
+        if(err) {
+            res.status(404);
+            res.send('Y u here?');
+        } else {
+            res.contentType("mp4");
+            res.send(data);
+        }   
+        res.end();
+    }); 
+});
 app.get('/lib/:file', function(req, res) {
     fs.readFile('./static/lib/' + req.params.file, function(err, data) {
         if(err) {

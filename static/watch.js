@@ -1,27 +1,33 @@
+function rnd() {return "X"+Math.floor(Math.random)}
+
 class contwatch {
     constructor(v) {
         this.videos = v
         this.parsed = {}
     }
 }
-
 class videoplayer {
     constructor(container, video, o) { // o = optionall {}
         this.container = container;
         this.videoid = video;
 
         // set html
-        fetch(`/video-api/${this.videoid}`).then(d => d.json())
-        .then(d => {this.parsed = d}).then(this.setup())
-        $(this.container).html(this.html("loading"))
+        fetch(`/video-api/${this.videoid}`).then(d => d.json()).then(d => this.setup(d, o))
+    }
+    setup(a, o) {
+        this.parsed = a
+        $(this.container).html(this.html())
 
+        // videocontrolls onto this.video
+        this.video = $(".videocontainer")
+        
         // clickable stuff:
         $(".play-img")             .click(() => {player.pp()})
         $(".cc-img")               .click(() => {player.cc()})
         $(".fullscreen-toggle-img").click(() => {player.fs()})
 
         // just to be sure
-        this.pp(true)
+        this.pp(false)
         this.cc(false)
         this.fs(false)
 
@@ -29,16 +35,57 @@ class videoplayer {
         if(o["from"]) {
             this.seek(o["from"])
         }
-    }
-    setup() {
-        $(this.container).html(this.html("loaded"))
-    }
 
-    html(type) {
-        if(type = "loading") {
-            return `<img class="w100" src="/static/16x9.png"><img class="loading-gif" src="/static/loading.gif">`
-        }
-        return `<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.slidesharecdn.com%2Fultimatetestpatternslides-170322155753%2F95%2Fultimate-video-engineer-16x9-test-pattern-2-638.jpg%3Fcb%3D1490198558&f=1&nofb=1" alt="" style="height: 100%; width: 100%; top:0;">
+        // time update
+        this.video.on("timeupdate", () => {
+            let ct = this.video[0].currentTime;
+            let md = this.video[0].duration;
+            let dura = new Date(this.video[0].duration * 1000).toISOString().substr(11,8).split(":")
+            let pass = new Date(ct * 1000).toISOString().substr(11,8).split(":")
+
+            // progress bar (the red thing)
+            let percentage = 100 * ct / md;
+            $(".timebar-progress").css("width", `${percentage}%`)
+
+            // passed time the 0:01 / 1:01
+            let p = ""
+            let d = ""
+            if(dura[0] != "00") {
+                d += pass[0] + ":"
+                p += dura[0] + ":"
+            }
+            if(dura[1] != "00") {
+                d += pass[1] + ":"
+                p += dura[1] + ":"
+            }
+            if(dura[2] != "00") {
+                d += pass[2]
+                p += dura[2]
+            }
+
+            console.log(d)
+            $(".timetxt-content").html(`${d} / ${p}`)
+
+        })
+        this.tD = false
+        $(".timebar").mousedown((e) => {
+            this.tD = true;
+            this.updateBar(e.pageX)
+        });
+        $(document).mouseup((e) => {
+            if(this.tD) {
+                this.tD = false;
+                this.updateBar(e.pageX)
+            }
+        })
+        $(document).mousemove((e) => {
+            if(this.tD) {
+                this.updateBar(e.pageX)
+            }
+        })
+    }
+    html(a) {
+        return `<video class="videocontainer"><source class="video" src="${this.parsed.src}" type="video/mp4"></video>
         <div class="videoplayer-controlls">
             <div class="play">
                 <img class="play-img clickable" src="/static/play.svg">
@@ -50,10 +97,6 @@ class videoplayer {
                 <span class="timetxt-content">
                     0:00 / 0:00
                 </span>
-            </div>
-            <div class="timebar clickable">
-                <div class="timebar-progress" style="width: 0.01%;">
-                </div>
             </div>
             <div class="cc">
                 <img src="/static/cc-off.svg" class="cc-img clickable">
@@ -67,6 +110,10 @@ class videoplayer {
             <div class="fullscreen-toggle">
                 <img class="fullscreen-toggle-img clickable" src="/static/fullscreen-off.svg">
             </div>
+            <div class="timebar clickable">
+                <div class="timebar-progress" style="width: 0%;">
+            </div>
+        </div>
         </div>`
     }
     pp(v) { // toggle for playpause; v = overwrite
@@ -75,10 +122,12 @@ class videoplayer {
         } else {
             this.playing = !this.playing
         }
-        if(this.playing) { 
-            $(".play-img").attr({"src": "/static/play.svg"})
-        } else {
+        if(this.playing) {
             $(".play-img").attr({"src": "/static/pause.svg"})
+            this.video[0].play()
+        } else {
+            $(".play-img").attr({"src": "/static/play.svg"})
+            this.video[0].pause()
         }
         return this.playing
     }
@@ -108,9 +157,28 @@ class videoplayer {
         }
         return this.fullscreen
     }
-    seek(ms) { // api function for seeking
+    seek(s) { // api function for seeking
         // placeholder
-        console.log(`[videoplayer] seeked to ${ms}`)
+        console.log(`[videoplayer] seeked to ${s}`)
+        return this.video[0].currentTime = s
+        
+    }
+    updateBar(x) {
+        let progress    = $(".timebar");
+        let maxduration = this.video[0].duration;
+        let position    = x - progress.offset().left
+        let percentage  = 100 * position / progress.width()
+
+        if(percentage > 100) {
+            percentage = 100
+        }
+        if(percentage < 0) {
+            percentage = 0;
+        }
+
+        $(".timebar-progress").css("width", percentage+"%");
+        this.seek(maxduration * percentage / 100)
+        console.log(maxduration * percentage / 100)
     }
 
 }

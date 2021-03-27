@@ -72,8 +72,8 @@ app.get('/watch/:video', function (req, res) {
 app.get('/channel-api/:channel', function (req, res) { channel_1.get_channel(req, res); });
 app.get('/video-api/:videoid', function (req, res) { video_1.get_video(req, res); });
 app.get('/img/:file', function (req, res) {
-    console.log("[" + req.ip + "|0/0] img at: ./storadge/img/" + req.params.file + ".png");
-    fs.readFile("./storadge/img/" + req.params.file + ".png", function (err, data) {
+    console.log("[" + req.ip + "|0/0] img at: ./storadge/img/" + req.params.file);
+    fs.readFile("./storadge/img/" + req.params.file, function (err, data) {
         if (err) {
             res.status(404);
             fs.readFile('./static/404.jpeg', function (err, data) {
@@ -91,6 +91,20 @@ app.get('/img/:file', function (req, res) {
             res.send(data);
             res.end();
         }
+    });
+});
+app.get('/vid/:file', function (req, res) {
+    fs.readFile("./storadge/vid/" + req.params.file + ".mp4", function (err, data) {
+        console.log(req.headers);
+        if (err) {
+            res.status(404);
+            res.send('Y u here?');
+        }
+        else {
+            res.contentType("mp4");
+            res.send(data);
+        }
+        res.end();
     });
 });
 app.get('/lib/:file', function (req, res) {

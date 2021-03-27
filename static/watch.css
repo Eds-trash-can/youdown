@@ -1,5 +1,5 @@
 .videoplayer-container {
-    background-color: green;
+    background-color: #414141;
 }
 @media only screen and (min-width: 930px) { /* Vertical video player */
     .videoplayer-container {
@@ -134,5 +134,8 @@
     left: calc(50% - 5em)
 }
 .w100 {
+    width: 100%;
+}
+.videocontainer {
     width: 100%;
 }
