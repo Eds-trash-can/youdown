@@ -1,6 +1,3 @@
-.videoplayer-container {
-    background-color: #414141;
-}
 @media only screen and (min-width: 930px) { /* Vertical video player */
     .videoplayer-container {
         position: absolute;
@@ -22,7 +19,7 @@
     }
 }
 @media only screen and (min-width: 1070px) { /* Four vids */
-    .recomendations-container {
+.recomendations-container {
         width: 90em;
     }
 }
@@ -53,10 +50,34 @@
     height: 100%;
     height: 100%;
 }
+.volume {
+    position: absolute;
+    bottom: .4em;
+    left: 6.1em;
+    height: 1.9em;
+    width: 1.9em;
+}
+.volume-img {
+    height: 100%;
+    width: 100%;
+}
+.volume-slider {
+    position: absolute;
+    bottom: .4em;
+    left: 8.1em;
+    height: 1.9em;
+    width: 5.1em;
+}
+.volume-slider-cntrl {
+    position: absolute;
+    left: 0;
+    margin-top: 0.5em;
+    width: 4.1em;
+}
 .timetxt {
     position: absolute;
     height: 1em;
-    left: 6em;
+    left: 12em;
     bottom: .8em;
 }
 .timetxt-content {
@@ -138,4 +159,13 @@
 }
 .videocontainer {
     width: 100%;
+}
+.cntrls-dimmarea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #0000001e;
+    height: 100%;
+    width: 100;
+    visibility: hidden;
 }

@@ -1,5 +1,19 @@
-function rnd() {return "X"+Math.floor(Math.random)}
-
+function getCookie(cname) { //thx www.w3schools.com/js/js_cookies.asp
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
+  
 class contwatch {
     constructor(v) {
         this.videos = v
@@ -14,10 +28,11 @@ class videoplayer {
         // set html
         fetch(`/video-api/${this.videoid}`).then(d => d.json()).then(d => this.setup(d, o))
     }
+
     setup(a, o) {
         this.parsed = a
         $(this.container).html(this.html())
-
+        $(".cntrls-dimmarea").width($(".cntrls-dimmarea").width())
         // videocontrolls onto this.video
         this.video = $(".videocontainer")
         
@@ -25,6 +40,7 @@ class videoplayer {
         $(".play-img")             .click(() => {player.pp()})
         $(".cc-img")               .click(() => {player.cc()})
         $(".fullscreen-toggle-img").click(() => {player.fs()})
+        $(".videocontainer")       .click(() => {player.pp()})
 
         // just to be sure
         this.pp(false)
@@ -83,15 +99,26 @@ class videoplayer {
                 this.updateBar(e.pageX)
             }
         })
+
+        // volume stuff read volume from cookies
+        console.log(`[videoplayer] read volume: ${this.volume()}`)
+
     }
     html(a) {
         return `<video class="videocontainer"><source class="video" src="${this.parsed.src}" type="video/mp4"></video>
+        <div class="cntrls-dimmarea">
         <div class="videoplayer-controlls">
             <div class="play">
                 <img class="play-img clickable" src="/static/play.svg">
             </div>
             <div class="skip-next">
                 <img class="skip-next-img clickable" src="/static/next.svg">
+            </div>
+            <div class="volume">
+                <img class="volume-img clickable" src="/static/volume.svg">
+            </div>
+            <div class="volume-slider">
+                <input type="range" min="0" max="1000" class="volume-slider-cntrl">
             </div>
             <div class="timetxt">
                 <span class="timetxt-content">
@@ -113,6 +140,7 @@ class videoplayer {
             <div class="timebar clickable">
                 <div class="timebar-progress" style="width: 0%;">
             </div>
+        </div>
         </div>
         </div>`
     }
@@ -150,7 +178,8 @@ class videoplayer {
         } else {
             this.fullscreen = !this.fullscreen
         }
-        if(this.fullscreen) { 
+        let doc = document.documentElement;
+        if(this.fullscreen) {
             $(".fullscreen-toggle-img").attr({"src": "/static/fullscreen-on.svg"})
         } else {
             $(".fullscreen-toggle-img").attr({"src": "/static/fullscreen-off.svg"})
@@ -180,7 +209,14 @@ class videoplayer {
         this.seek(maxduration * percentage / 100)
         console.log(maxduration * percentage / 100)
     }
-
+    volume(v) {// api function for volume (also cookies)
+        if(v) {
+            document.cookie = `volume=${v}; expires=Thu, 18 Dec 3000 12:00:00 UTC`
+            return this.video[0].volume = v
+        } else {
+            return this.video[0].volume = getCookie("volume")
+        }
+    }
 }
 
 $(document).ready(() => {
