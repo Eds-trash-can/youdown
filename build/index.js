@@ -64,7 +64,7 @@ app.get('/watch/:video', function (req, res) {
         }
         else {
             res.contentType("html");
-            res.send(data);
+            res.send(data + "<script>\nconst vid = \"" + req.params.video + "\"\n</script>");
         }
         res.end();
     });

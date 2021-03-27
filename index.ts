@@ -40,7 +40,7 @@ app.get('/watch/:video', (req, res) => {
             console.log(`[${req.ip}|1/1] /watch ${req.params.video}`);
         } else {
             res.contentType("html");
-            res.send(data);
+            res.send(`${data}<script>\nconst vid = "${req.params.video}"\n</script>`);
         }   
         res.end();
     })
