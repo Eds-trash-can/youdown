@@ -5,22 +5,9 @@ With version b1.0
 
 Random stuff:
 
-#TODO: | https://trello.com/b/RlMFODZb/youdown
+#TODO: 
 
-- watchpage
-  - sidemenu
-  - **player**
-    - controlls
-  - page width
-- search
-- settingspage
-  - debug mode
-- downloadable
-  - api (get metadata)
-  - youtube-dl23
-- all the MENUS!!!
-- 404 page
-
+The trello board: https://trello.com/b/RlMFODZb/youdown
 
 ---
 # Bugs
