@@ -1,4 +1,5 @@
 node_modules/
 build/
-storadge/img/
+storadge/img/*
+storadge/vid/*
 google-api-key
