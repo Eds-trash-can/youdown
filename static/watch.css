@@ -160,12 +160,11 @@
 .videocontainer {
     width: 100%;
 }
-.cntrls-dimmarea {
+/*.cntrls-dimmarea {
     position: absolute;
     top: 0;
     left: 0;
     background-color: #0000001e;
     height: 100%;
     width: 100;
-    visibility: hidden;
-}
+}*/

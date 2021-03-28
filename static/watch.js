@@ -41,6 +41,7 @@ class videoplayer {
         $(".cc-img")               .click(() => {player.cc()})
         $(".fullscreen-toggle-img").click(() => {player.fs()})
         $(".videocontainer")       .click(() => {player.pp()})
+        $(".volume-slider-cntrl")  .on("change", () => {player.volume(($(".volume-slider-cntrl").val()/1000))})
 
         // just to be sure
         this.pp(false)
@@ -78,8 +79,6 @@ class videoplayer {
                 d += pass[2]
                 p += dura[2]
             }
-
-            console.log(d)
             $(".timetxt-content").html(`${d} / ${p}`)
 
         })
@@ -101,7 +100,7 @@ class videoplayer {
         })
 
         // volume stuff read volume from cookies
-        console.log(`[videoplayer] read volume: ${this.volume()}`)
+        this.volume()
 
     }
     html(a) {
@@ -210,10 +209,12 @@ class videoplayer {
         console.log(maxduration * percentage / 100)
     }
     volume(v) {// api function for volume (also cookies)
-        if(v) {
-            document.cookie = `volume=${v}; expires=Thu, 18 Dec 3000 12:00:00 UTC`
+        if(typeof(v) != "undefined") {
+            document.cookie = `volume=${v}; expires=Thu, 18 Dec 3000 12:00:00 UTC; path=/`
+            console.log(`[videoplayer] changed volume to ${v}`)
             return this.video[0].volume = v
         } else {
+            console.log(`[videoplayer] read volume (${getCookie("volume")}) from cookie`)
             return this.video[0].volume = getCookie("volume")
         }
     }

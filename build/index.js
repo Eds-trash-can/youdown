@@ -95,7 +95,6 @@ app.get('/img/:file', function (req, res) {
 });
 app.get('/vid/:file', function (req, res) {
     fs.readFile("./storadge/vid/" + req.params.file + ".mp4", function (err, data) {
-        console.log(req.headers);
         if (err) {
             res.status(404);
             res.send('Y u here?');
