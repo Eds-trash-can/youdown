@@ -33,9 +33,26 @@ class videoplayer {
         this.parsed = a
         $(this.container).html(this.html())
         $(".cntrls-dimmarea").width($(".cntrls-dimmarea").width())
-        // videocontrolls onto this.video
-        this.video = $(".videocontainer")
         
+        // cntrls
+        this.video = $(".videocontainer")
+            // hiding em'
+            player.cntrls_timer = 0
+            $(".videocontainer").mousemove(function( event ) {
+                player.cntrls(20)
+            });
+            $(".videoplayer-controlls").hover(
+                () => {
+                    this.cntrls_hover = true
+                }, () => {
+                    this.cntrls_hover = false
+                }
+              );
+            $(".videocontainer").hover(() => {}, () => {
+                this.cntrls(1)
+            })
+            this.cntrls(20)
+            
         // clickable stuff:
         $(".play-img")             .click(() => {player.pp()})
         $(".cc-img")               .click(() => {player.cc()})
@@ -105,43 +122,41 @@ class videoplayer {
     }
     html(a) {
         return `<video class="videocontainer"><source class="video" src="${this.parsed.src}" type="video/mp4"></video>
-        <div class="cntrls-dimmarea">
+        </div>
         <div class="videoplayer-controlls">
-            <div class="play">
-                <img class="play-img clickable" src="/static/play.svg">
-            </div>
-            <div class="skip-next">
-                <img class="skip-next-img clickable" src="/static/next.svg">
-            </div>
-            <div class="volume">
-                <img class="volume-img clickable" src="/static/volume.svg">
-            </div>
-            <div class="volume-slider">
-                <input type="range" min="0" max="1000" class="volume-slider-cntrl">
-            </div>
-            <div class="timetxt">
-                <span class="timetxt-content">
-                    0:00 / 0:00
-                </span>
-            </div>
-            <div class="cc">
-                <img src="/static/cc-off.svg" class="cc-img clickable">
-            </div> 
-            <div class="settings">
-                <img src="/static/settings.svg" class="settings-img clickable">
-            </div>
-            <div class="pip-activate">
-                <img class="pip-symbol clickable" src="/static/pip.svg">
-            </div>
-            <div class="fullscreen-toggle">
-                <img class="fullscreen-toggle-img clickable" src="/static/fullscreen-off.svg">
-            </div>
-            <div class="timebar clickable">
-                <div class="timebar-progress" style="width: 0%;">
-            </div>
+        <div class="play">
+            <img class="play-img clickable" src="/static/play.svg">
         </div>
+        <div class="skip-next">
+            <img class="skip-next-img clickable" src="/static/next.svg">
         </div>
-        </div>`
+        <div class="volume">
+            <img class="volume-img clickable" src="/static/volume.svg">
+        </div>
+        <div class="volume-slider">
+            <input type="range" min="0" max="1000" class="volume-slider-cntrl">
+        </div>
+        <div class="timetxt">
+            <span class="timetxt-content">
+                0:00 / 0:00
+            </span>
+        </div>
+        <div class="cc">
+            <img src="/static/cc-off.svg" class="cc-img clickable">
+        </div> 
+        <div class="settings">
+            <img src="/static/settings.svg" class="settings-img clickable">
+        </div>
+        <div class="pip-activate">
+            <img class="pip-symbol clickable" src="/static/pip.svg">
+        </div>
+        <div class="fullscreen-toggle">
+            <img class="fullscreen-toggle-img clickable" src="/static/fullscreen-off.svg">
+        </div>
+        <div class="timebar clickable">
+            <div class="timebar-progress" style="width: 0%;">
+        </div>
+    </div>`
     }
     pp(v) { // toggle for playpause; v = overwrite
         if(typeof(v) == "boolean") {
@@ -155,6 +170,8 @@ class videoplayer {
         } else {
             $(".play-img").attr({"src": "/static/play.svg"})
             this.video[0].pause()
+            this.mincntrls(20)
+            console.log("IS THIS SHIT BROKEN OR WHAT?")
         }
         return this.playing
     }
@@ -218,6 +235,36 @@ class videoplayer {
             return this.video[0].volume = getCookie("volume")
         }
     }
+    cntrls(v, w) { // api for toggeling the controlls; v*100 time of ms its visible (0 does insta hide); DONT USE w ITS USED INTERNALY
+        if(this.cntrls_hover | !this.playing) {
+            setTimeout(() => {
+                player.cntrls(player.cntrls_timer - 1, true)
+            }, 100)
+            return
+        }
+        if(this.cntrls_timer == 0 & w) {
+            $(".videoplayer-controlls").fadeOut(100)
+            return
+        }
+        if(w | this.cntrls_timer == 0) {
+            $(".videoplayer-controlls").fadeIn(100)
+            this.cntrls_timer = v
+            setTimeout(() => {
+                player.cntrls(player.cntrls_timer - 1, true)
+            }, 100)
+            return
+        } 
+        this.cntrls_timer = v
+    }
+    mincntrls(v) { // api to set minimum time controlls are visible (prefers the bigger one of v or this.cntrls_timer)
+        if(v > this.cntrls_timer) {
+            v = this.cntrls_timer
+        } else {
+            v = v
+        }
+        return this.cntrls(v)
+    }
+
 }
 
 $(document).ready(() => {
