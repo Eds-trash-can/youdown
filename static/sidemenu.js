@@ -1,11 +1,12 @@
 class sidemenu {
-    constructor(area, dimmarea, button, collapsed) { // if not collapsed (not implemented)
+    constructor(area, dimmarea, button, collapsed, html) { // if not collapsed (not implemented)
         this.area = area
         this.collapsed = collapsed
         this.state = false
         this.dimmarea = dimmarea
         this.animate(0)
-        $(area).html(`<div class="menu-toggle-container">
+        if(!html) {
+            $(area).html(`<div class="menu-toggle-container">
         <img src="/static/menu-white.png" class="menu-toggle">
     </div>
     
@@ -49,6 +50,9 @@ class sidemenu {
     <div style="top: 11em; left: 0.5em; width: calc(100% - 1em)" class="extended-menu-entry">
     <hr></hr>
     </div>`)
+        } else {
+            $(area).html(html)
+        }
         /*if(collapsed) {
             $(collapsed).html(`Some entrys`)
         } // expand this if u rly want to */

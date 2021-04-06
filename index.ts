@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import * as bodyParser from 'body-parser'
 import { get_channel } from './channel';
 import { get_video } from './video';
+import * as google from "googleapis";
 //import { user } from 'users';
 
 const app = express();
@@ -17,7 +18,26 @@ app.get('/', (req, res) => {
     })
 
 })
+app.get('/settings', (req, res) => {
+    fs.readFile('./static/settings/index.html', (err, data) => {
+        if(err) { res.status(404); res.end(`<p>Lol error:</p>${err}`) } else {
+            res.end(data)
+        }
+    })
 
+})
+app.get('/settings/:file', function(req, res) {
+    fs.readFile('./static/settings/' + req.params.file + ".html", function(err, data) {
+        if(err) {
+            res.status(404);
+            res.send('settings-page not found!');
+        } else {
+            res.contentType(req.params.file + ".html");
+            res.send(data);
+        }   
+        res.end();
+    }); 
+});
 app.get('/static/:file', function(req, res) {
     fs.readFile('./static/' + req.params.file, function(err, data) {
         if(err) {
