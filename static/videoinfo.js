@@ -2,7 +2,7 @@ ytapi = new class {
   constructor() {
     fetch("/static/apikeys.json").then(data => {
       return data.json();
-    }).then((data) => {this.apis = data; console.log(data)})
+    }).then((data) => {this.apis = data})
   }
   async getplaylist(id) { // well gets an playlist thingy
     return fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${id}&key=${this.apis.google}`)

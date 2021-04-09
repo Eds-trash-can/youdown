@@ -49,6 +49,14 @@ class sidemenu {
                     top += 3
                     break;
                 
+                case "topic":
+                    html += `<div style="top: ${top}em" class="text-entry">
+                        <div class="text-entry-container">
+                            <span class="text-entry-text">${content[i].text.toUpperCase()}</span>
+                        </div>
+                    </div>`
+                    top += 3   
+                break;
             }
             html += "</div>"
         $(area).html(html)
@@ -73,7 +81,6 @@ class sidemenu {
         } else {
             $(this.dimmarea).attr("style", "height: 100%")
             $(this.dimmarea).click(() => {this.state = false; this.animate()})
-            console.log(`$("${this.dimmarea}").attr("style", "height: 100%")`)
         }
         return i
     }
