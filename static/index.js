@@ -18,7 +18,6 @@ class recomen {
                 vpr++;
                 break;
         }
-        console.log(`Lul Screen fits ${vpr} Videos!`);
 
         let html;
         let index = 0;
@@ -26,13 +25,9 @@ class recomen {
         html = `<div class="recomendations-container">\n<div class="video-row">`;
         for (let x = 2; x != 0; x--) {
             for (let y = vpr; y != 0; y--) {
-                console.log(`Hi were at:${x}-${y}!`)
-                console.log(this.videos[index])
                 //let icon, chinfo
                 const icon = `rnd-${Math.floor(Math.random()*10000)}`
                 const chinfo = `rnd-${Math.floor(Math.random()*10000)}`
-                console.log(this)
-                console.log(`${x}-${y}`)
                 html += `
                 <div class="video-container" style="backgound-color: green; top: ${(x-1)*22}em; left: ${(y-1)*23}em">
                 <div class="thumbnail-container">
@@ -68,9 +63,9 @@ $(document).ready(() => {
     recommended.getrecommended(8).then((a) => {
         recommendation = new recomen(a)
         $(".main-area-container").html(recommendation.html)
-        console.log(recommendation.html)
     }) /* still tmp */
-    menu = new sidemenu(".dark-sidemenu-left-extended", ".dimm-overlay", ".dark-startmenu-left");
+    menu = new sidemenu(".dark-sidemenu-left-extended", ".dimm-overlay", ".dark-startmenu-left", "",
+    [{"type":"entry","name":"Home","icon":"/static/home.svg","link":"/"},{"type":"entry","name":"Last","icon":"/static/last.svg","link":"/last"},{"type":"entry","name":"New","icon":"/static/clock.svg","link":"/new"}]);
 
     $(".menu-toggle").click(() => menu.toggle())
 

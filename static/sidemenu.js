@@ -1,12 +1,11 @@
 class sidemenu {
-    constructor(area, dimmarea, button, collapsed, html) { // if not collapsed (not implemented)
+    constructor(area, dimmarea, button, collapsed, content) { // if not collapsed (not implemented)
         this.area = area
         this.collapsed = collapsed
         this.state = false
         this.dimmarea = dimmarea
         this.animate(0)
-        if(!html) {
-            $(area).html(`<div class="menu-toggle-container">
+        let html = `<div class="menu-toggle-container">
         <img src="/static/menu-white.png" class="menu-toggle">
     </div>
     
@@ -14,44 +13,45 @@ class sidemenu {
     <a href="/">
         <span class="logo">YouDown</span>
         </a>
-    </div>
-    <div style="top: 4em" class="extended-menu-entry">
-    <a href="/">
-        <div class="extended-menu-icon-container home-src">
-            <img src="/static/home.svg" class="extended-menu-icon">
-        </div>
-        <div class="extended-menu-text-container home-src">
-            <span class="extended-menu-text">Home</span>
-        </div>
-        </a>
-    </div>
-    
-    <div style="top: 6em" class="extended-menu-entry">
-    <a href="/new">
-        <div class="extended-menu-icon-container">
-            <img src="/static/clock.svg" class="extended-menu-icon">
-        </div>
-        <div class="extended-menu-text-container">
-            <span class="extended-menu-text">Neu</span>
-        </div>
-        </a>
-    </div>
+    </div>`
+        let top = 4
+        for(let i = 0; i < content.length; i++) {
+            switch(content[i].type) {
+                case "entry":
+                    html += `<div style="top: ${top}em" class="extended-menu-entry">
+                <a href="${content[i].link}">
+                    <div class="extended-menu-icon-container">
+                        <img src="${content[i].icon}" class="extended-menu-icon">
+                    </div>
+                    <div class="extended-menu-text-container">
+                        <span class="extended-menu-text">${content[i].name}</span>
+                    </div>
+                    </a>
+                    </div>`
+                    top += 2
+                    break;
 
-    <div style="top: 8em" class="extended-menu-entry">
-    <a href="/last">
-        <div class="extended-menu-icon-container">
-            <img src="/static/last.svg" class="extended-menu-icon">
-        </div>
-        <div class="extended-menu-text-container">
-            <span class="extended-menu-text">Last</span>
-        </div>
-        </a>
-    </div>
-    <div style="top: 11em; left: 0.5em; width: calc(100% - 1em)" class="extended-menu-entry">
-    <hr></hr>
-    </div>`)
-        } else {
-            $(area).html(html)
+                case "seperator": 
+                    html += `<div style="top: ${top+3}em; left: 0.5em; width: calc(100% - 1em)" class="extended-menu-entry">
+                    <hr></hr>`
+                    top += 5
+                    break;
+                
+                case "sentry": 
+                    html += `<a href="${content[i].link}">
+                    <div style="top: ${top}em" class="smenu-entry">
+                    
+                        <div class="smenu-text-container">
+                            <span class="smenu-text">${content[i].name}</span>
+                        </div>
+                    </div>
+                    </a>`
+                    top += 3
+                    break;
+                
+            }
+            html += "</div>"
+        $(area).html(html)
         }
         /*if(collapsed) {
             $(collapsed).html(`Some entrys`)
