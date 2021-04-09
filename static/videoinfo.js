@@ -27,6 +27,15 @@ ytapi = new class {
       }
     }
     return tkn2
-    
+  }
+  async searchChannel(name, count) {
+    return fetch(`https://www.googleapis.com/youtube/v3/search?key=${this.apis.google}&part=snippet&maxResults=${count}&q=${name}&type=channel`).then(data => {
+      return data.json()
+    })
+  }
+  async channelInfo(id) {
+    return fetch(`https://www.googleapis.com/youtube/v3/channels?key=${this.apis.google}&part=snippet&id=${id}`).then(d => d.json()).then((d) => {
+      return d.items[0]
+    })
   }
 }
