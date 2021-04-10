@@ -5,3 +5,6 @@
     width: calc(100%-4em);
     top: 0.5em
 }
+.settingsmenu {
+    background-color: #111;
+}
