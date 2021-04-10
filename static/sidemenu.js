@@ -1,7 +1,7 @@
 class sidemenu {
-    constructor(area, dimmarea, button, collapsed, content, defaultstate) { // if not collapsed (not implemented)
+    constructor(area, dimmarea, collapsed, content, defaultstate) { // if not collapsed (not implemented)
         this.area = area           // area of sidemenu
-        this.collapsed = collapsed // does nth
+        this.collapsed = collapsed // does nth; planned for future
         this.dimmarea = dimmarea   // div to be streatched over screen
         if(defaultstate) {         // if defaultstate is open => disables dimming
             this.state = true
@@ -102,9 +102,9 @@ class sidemenu {
     animate(a) { // animates the sidemenu; a is the animationtime in ms defualt: 1000
     if(!a) {let a = 1000}
         if(this.state) {
-            $(".dark-sidemenu-left-extended").animate({left: "0"}, a)
+            $(this.area).animate({left: "0"}, a)
         } else {
-            $(".dark-sidemenu-left-extended").animate({left: "-16em"}, a)
+            $(this.area).animate({left: "-16em"}, a)
         }
         this.dimm(this.state)
 

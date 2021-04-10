@@ -64,7 +64,7 @@ $(document).ready(() => {
         recommendation = new recomen(a)
         $(".main-area-container").html(recommendation.html)
     }) /* still tmp */
-    menu = new sidemenu(".dark-sidemenu-left-extended", ".dimm-overlay", ".dark-startmenu-left", "",
+    menu = new sidemenu(".dark-sidemenu-left-extended", ".dimm-overlay", "",
     [{"type":"space"},{"type":"entry","name":"Home","icon":"/static/home.svg","link":"/"},{"type":"entry","name":"Last","icon":"/static/last.svg","link":"/last"},{"type":"entry","name":"New","icon":"/static/clock.svg","link":"/new"}]);
 
     $(".menu-toggle").click(() => menu.toggle())

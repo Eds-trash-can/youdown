@@ -40,10 +40,13 @@ class stat {
 
 $(document).ready(() => {
     console.log("Hi, this page is now starting the initialisation process!", )
-    menu = new sidemenu(".dark-sidemenu-left-extended", ".dimm-overlay", ".dark-startmenu-left", "",
+    /*settingsmenu = new sidemenu(".settingsmenu", "", "settingsstartmenu", "",
     [{"type":"sentry","name":"Overview","link":"/settings/"},
     {"type":"topic","text":"content"},
     {"type":"sentry","name":"","link":"/last"},
-    {"type":"sentry","name":"New","link":"/new"}], true);
-    //$(".menu-toggle").click(() => menu.toggle()) // im to dumb to make the .main-are-container automaticaly change size :(
+    {"type":"sentry","name":"New","link":"/new"}], true); */
+    menu = new sidemenu(".sidemenu", ".dimm-overlay", "",
+    [{"type":"space"},{"type":"entry","name":"Home","icon":"/static/home.svg","link":"/"},{"type":"entry","name":"Last","icon":"/static/last.svg","link":"/last"},{"type":"entry","name":"New","icon":"/static/clock.svg","link":"/new"}]);
+
+    $(".menu-toggle").click(() => menu.toggle())
 })
