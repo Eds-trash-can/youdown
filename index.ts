@@ -2,7 +2,7 @@ import express from 'express';
 import * as fs from 'fs';
 import * as bodyParser from 'body-parser'
 import { get_channel } from './channel';
-import { get_video, video_statistics } from './video';
+import { get_video, video_statistics, video_stream } from './video';
 import * as google from "googleapis";
 //import { user } from 'users';
 
@@ -89,18 +89,8 @@ app.get('/img/:file', (req, res) => {
         }
     }); 
 })
-app.get('/vid/:file', function(req, res) {
-    fs.readFile(`./storadge/vid/${req.params.file}.mp4`, function(err, data) {
-        if(err) {
-            res.status(404);
-            res.send('Y u here?');
-        } else {
-            res.contentType("mp4");
-            res.send(data);
-        }   
-        res.end();
-    }); 
-});
+app.get('/vid/:file', (req, res) => video_stream(req, res));
+
 app.get('/lib/:file', function(req, res) {
     fs.readFile('./static/lib/' + req.params.file, function(err, data) {
         if(err) {

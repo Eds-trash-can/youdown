@@ -118,19 +118,7 @@ app.get('/img/:file', function (req, res) {
         }
     });
 });
-app.get('/vid/:file', function (req, res) {
-    fs.readFile("./storadge/vid/" + req.params.file + ".mp4", function (err, data) {
-        if (err) {
-            res.status(404);
-            res.send('Y u here?');
-        }
-        else {
-            res.contentType("mp4");
-            res.send(data);
-        }
-        res.end();
-    });
-});
+app.get('/vid/:file', function (req, res) { return video_1.video_stream(req, res); });
 app.get('/lib/:file', function (req, res) {
     fs.readFile('./static/lib/' + req.params.file, function (err, data) {
         if (err) {

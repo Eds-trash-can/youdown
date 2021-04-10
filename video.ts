@@ -3,7 +3,22 @@ import * as fs from "fs";
 export class video {}
 export function get_video(req: any, res: any):void {
     console.log(`[${req.ip}] Got video info ${req.params.videoid}`);
-    let path = "storadge/vid/"+req.params.videoid+".mp4"
+
+    fs.readFile('./storadge/videos.json', (err, data) => {
+        if(err) {
+            console.log(`lul an error accured reading some random file! (No i wont tell u which but de error)`);
+            console.log(`Error: ${err}`);
+            res.status(404);
+            res.end("lul err!");
+        } else {
+            let str = data.toString()
+            res.end(JSON.stringify(JSON.parse(str)[req.params.videoid]))
+        }
+    })
+}
+
+export function video_stream(req: any, res:any) {
+    let path = "./storadge/vid/"+req.params.file+".mp4"
     fs.stat(path, (err, stat) => { //thx for the example i basically just copied it :))) https://webomnizz.com/video-stream-example-with-nodejs-and-html5/
 
         // Handle file not found
@@ -43,6 +58,7 @@ export function get_video(req: any, res: any):void {
         }
     })
 };
+
 export function video_statistics(req: any, res: any):void {
     console.log(`[${req.ip}] Got stats of ${req.params.stat}`)
     fs.readFile('./storadge/videos.json', (err, data) => {

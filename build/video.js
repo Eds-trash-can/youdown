@@ -19,7 +19,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.video_statistics = exports.get_video = exports.video = void 0;
+exports.video_statistics = exports.video_stream = exports.get_video = exports.video = void 0;
 var fs = __importStar(require("fs"));
 var video = /** @class */ (function () {
     function video() {
@@ -31,7 +31,10 @@ function get_video(req, res) {
     console.log("[" + req.ip + "] Got video info " + req.params.videoid);
     fs.readFile('./storadge/videos.json', function (err, data) {
         if (err) {
+            console.log("lul an error accured reading some random file! (No i wont tell u which but de error)");
+            console.log("Error: " + err);
             res.status(404);
+            res.end("lul err!");
         }
         else {
             var str = data.toString();
@@ -40,6 +43,42 @@ function get_video(req, res) {
     });
 }
 exports.get_video = get_video;
+function video_stream(req, res) {
+    var path = "./storadge/vid/" + req.params.file + ".mp4";
+    fs.stat(path, function (err, stat) {
+        // Handle file not found
+        if (err !== null && err.code === 'ENOENT') {
+            res.sendStatus(404);
+        }
+        var fileSize = stat.size;
+        var range = req.headers.range;
+        if (range) {
+            var parts = range.replace(/bytes=/, "").split("-");
+            var start = parseInt(parts[0], 10);
+            var end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+            var chunksize = (end - start) + 1;
+            var file = fs.createReadStream(path, { start: start, end: end });
+            var head = {
+                'Content-Range': "bytes " + start + "-" + end + "/" + fileSize,
+                'Accept-Ranges': 'bytes',
+                'Content-Length': chunksize,
+                'Content-Type': 'video/mp4',
+            };
+            res.writeHead(206, head);
+            file.pipe(res);
+        }
+        else {
+            var head = {
+                'Content-Length': fileSize,
+                'Content-Type': 'video/mp4',
+            };
+            res.writeHead(200, head);
+            fs.createReadStream(path).pipe(res);
+        }
+    });
+}
+exports.video_stream = video_stream;
+;
 function video_statistics(req, res) {
     console.log("[" + req.ip + "] Got stats of " + req.params.stat);
     fs.readFile('./storadge/videos.json', function (err, data) {

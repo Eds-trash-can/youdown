@@ -220,6 +220,9 @@ class videoplayer {
         console.log(maxduration * percentage / 100)
     }
     volume(v) {// api function for volume (also cookies)
+        if(!v & getCookie("volume") == "") {
+            v = .5
+        }
         if(typeof(v) != "undefined") {
             document.cookie = `volume=${v}; expires=Thu, 18 Dec 3000 12:00:00 UTC; path=/`
             console.log(`[videoplayer] changed volume to ${v}`)
