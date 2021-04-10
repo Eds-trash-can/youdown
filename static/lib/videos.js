@@ -25,7 +25,7 @@ const recommended = new class {
         Never gonna say goodbye
         Never gonna tell a lie and hurt you
         
-        #RickAstley​ #NeverGonnaGiveYouUp​ #DancePop`, "src": "/video/Adc-_e45", "author": {"channelName": "Official Rick Astley", "channelID": "yt-UCuAXFkgsw1L7xaCfnd5JJOw", "platform": "Youtube"}, "release": "2009-10-25T00:00:00Z", "id":"yt-dQw4w9WgXcQ"};
+        #RickAstley​ #NeverGonnaGiveYouUp​ #DancePop`, "author": {"channelName": "Official Rick Astley", "channelID": "yt-UCuAXFkgsw1L7xaCfnd5JJOw", "platform": "Youtube"}, "release": "2009-10-25T00:00:00Z", "id":"yt-dQw4w9WgXcQ"};
         
         let re = []
         for(;i != 0; i--){

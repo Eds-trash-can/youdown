@@ -115,7 +115,7 @@ class videoplayer {
 
     }
     html(a) {
-        return `<video class="videocontainer"><source class="video" src="${this.parsed.src}" type="video/mp4"></video>
+        return `<video class="videocontainer"><source class="video" src="${this.parsed.media}" type="video/mp4"></video>
         </div>
         <div class="videoplayer-controlls">
         <div class="play">

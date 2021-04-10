@@ -28,8 +28,8 @@ class recomen {
                 //let icon, chinfo
                 const icon = `rnd-${Math.floor(Math.random()*10000)}`
                 const chinfo = `rnd-${Math.floor(Math.random()*10000)}`
-                html += `
-                <div class="video-container" style="backgound-color: green; top: ${(x-1)*22}em; left: ${(y-1)*23}em">
+                html += `<a href="/watch/${this.videos[index].id}">
+                <div class="video-container clickable" style="backgound-color: green; top: ${(x-1)*22}em; left: ${(y-1)*23}em">
                 <div class="thumbnail-container">
                     <img class="thumbnail-picture" src="${this.videos[index].thumbnail}">
                 </div>
