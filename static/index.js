@@ -36,19 +36,22 @@ class recomen {
 
                 <div class="video-info">
                     <div class="video-info-channel-icon-container">
-                        <img class="video-info-channel-icon" id="${icon}" src="">
+                    <a href="/channels/${this.videos[index].author.channelID}">
+                        <img class="video-info-channel-icon clickable" id="${icon}" src="">
+                        </a>
                     </div>
                     <div class="video-info-title-container">
                         <span class="video-info-title">${this.videos[index].title}</span>
                     </div>
                     <div class="video-info-channel-container">
-                        <span class="video-info-channel" id="${chinfo}"></span>
-                    </div>
+                    <a href="/channels/${this.videos[index].author.channelID}" style="text-decoration: none;">
+                        <span class="video-info-channel clickable">${this.videos[index].author.channelName} @${this.videos[index].author.platform}</span>
+                    </a>
+                        </div>
                 </div>
             </div>`;
-                const ch = channels.get(this.videos[index].author);
-                ch.then((a) => {$(`#${icon}`  ).attr("src", a.icon  )})
-                ch.then((a) => {$(`#${chinfo}`).html(`${a.name} @${a.platform}`)})
+                const ch = channels.get(this.videos[index].author.channelID);
+                ch.then((a) => {$(`#${icon}`  ).attr("src", a.icon)})
 
                 index++;
             };
