@@ -45,5 +45,5 @@ $(document).ready(() => {
     {"type":"topic","text":"content"},
     {"type":"sentry","name":"","link":"/last"},
     {"type":"sentry","name":"New","link":"/new"}], true);
-    $(".menu-toggle").click(() => menu.toggle())
+    //$(".menu-toggle").click(() => menu.toggle()) // im to dumb to make the .main-are-container automaticaly change size :(
 })

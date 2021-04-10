@@ -1,16 +1,17 @@
 class sidemenu {
     constructor(area, dimmarea, button, collapsed, content, defaultstate) { // if not collapsed (not implemented)
-        this.area = area
-        this.collapsed = collapsed
-        this.dimmarea = dimmarea
-        if(defaultstate) {
+        this.area = area           // area of sidemenu
+        this.collapsed = collapsed // does nth
+        this.dimmarea = dimmarea   // div to be streatched over screen
+        if(defaultstate) {         // if defaultstate is open => disables dimming
             this.state = true
             this.dimmarea = ""
         } else {
             this.state = false
         }
+        this.animate(0) // applys state change
 
-        this.animate(0)
+        // parse menu entrys to html
         let html = `<div class="menu-toggle-container">
         <img src="/static/menu-white.png" class="menu-toggle">
     </div>
@@ -79,17 +80,17 @@ class sidemenu {
             $(collapsed).html(`Some entrys`)
         } // expand this if u rly want to */
     }
-    set(i) {
+    set(i) { // sets state of sidemenu
         this.state = i; this.animate()
     }
 
-    toggle() {
+    toggle() { // toggles sidemenu
         this.state = this.state != true
         this.animate()
         this.dimm(this.state)
         return this.state
     }
-    dimm(i) {
+    dimm(i) { // just dimms without affecting the state of the menu (dosnt work if defaultstate is true)
         if(!i) {
             $(this.dimmarea).attr("style", "height: 0%")
         } else {
@@ -98,8 +99,8 @@ class sidemenu {
         }
         return i
     }
-    animate(a) {
-        if(!a) {let a = 1000}
+    animate(a) { // animates the sidemenu; a is the animationtime in ms defualt: 1000
+    if(!a) {let a = 1000}
         if(this.state) {
             $(".dark-sidemenu-left-extended").animate({left: "0"}, a)
         } else {
