@@ -19,7 +19,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.get_video = exports.video = void 0;
+exports.video_statistics = exports.get_video = exports.video = void 0;
 var fs = __importStar(require("fs"));
 var video = /** @class */ (function () {
     function video() {
@@ -31,10 +31,7 @@ function get_video(req, res) {
     console.log("[" + req.ip + "] Got video info " + req.params.videoid);
     fs.readFile('./storadge/videos.json', function (err, data) {
         if (err) {
-            console.log("lul an error accured reading some random file! (No i wont tell u which but de error)");
-            console.log("Error: " + err);
             res.status(404);
-            res.end("lul err!");
         }
         else {
             var str = data.toString();
@@ -43,3 +40,20 @@ function get_video(req, res) {
     });
 }
 exports.get_video = get_video;
+function video_statistics(req, res) {
+    console.log("[" + req.ip + "] Got stats of " + req.params.stat);
+    fs.readFile('./storadge/videos.json', function (err, data) {
+        if (err) {
+            res.status(404);
+        }
+        else {
+            var str = data.toString();
+            switch (req.params.stat) {
+                case "videocount":
+                    res.end(JSON.stringify({ "videocount": Object.keys(JSON.parse(str)).length }));
+                    break;
+            }
+        }
+    });
+}
+exports.video_statistics = video_statistics;

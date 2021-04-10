@@ -1,9 +1,8 @@
-import { O_DIRECT } from 'constants';
 import express from 'express';
 import * as fs from 'fs';
 import * as bodyParser from 'body-parser'
 import { get_channel } from './channel';
-import { get_video } from './video';
+import { get_video, video_statistics } from './video';
 import * as google from "googleapis";
 //import { user } from 'users';
 
@@ -68,6 +67,7 @@ app.get('/watch/:video', (req, res) => {
 
 app.get('/channel-api/:channel', (req, res) => {get_channel(req, res)})
 app.get('/video-api/:videoid', (req, res) => {get_video(req, res)})
+app.get('/stats-api/:stat', (req, res) => {video_statistics(req, res)})
 
 app.get('/img/:file', (req, res) => {
     console.log(`[${req.ip}|0/0] img at: ./storadge/img/${req.params.file}`)
