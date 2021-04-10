@@ -1,9 +1,15 @@
 class sidemenu {
-    constructor(area, dimmarea, button, collapsed, content) { // if not collapsed (not implemented)
+    constructor(area, dimmarea, button, collapsed, content, defaultstate) { // if not collapsed (not implemented)
         this.area = area
         this.collapsed = collapsed
-        this.state = false
         this.dimmarea = dimmarea
+        if(defaultstate) {
+            this.state = true
+            this.dimmarea = ""
+        } else {
+            this.state = false
+        }
+
         this.animate(0)
         let html = `<div class="menu-toggle-container">
         <img src="/static/menu-white.png" class="menu-toggle">
@@ -14,7 +20,7 @@ class sidemenu {
         <span class="logo">YouDown</span>
         </a>
     </div>`
-        let top = 4
+        let top = 3
         for(let i = 0; i < content.length; i++) {
             switch(content[i].type) {
                 case "entry":
@@ -57,6 +63,14 @@ class sidemenu {
                     </div>`
                     top += 3   
                 break;
+
+                case "space":
+                    top ++;
+                break;
+
+                case "raw":
+                    html += content[i].html
+                    top +=  content[i].height
             }
             html += "</div>"
         $(area).html(html)

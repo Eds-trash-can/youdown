@@ -1,0 +1,7 @@
+.stats {
+    background-color: green;
+    left: auto;
+    right: auto;
+    width: calc(100%-4em);
+    top: 0.5em
+}
