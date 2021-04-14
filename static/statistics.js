@@ -1,4 +1,4 @@
-class stat {
+class stat { //hi
     constructor(container, name, reqfreq, api, type) {
         this.container = container // container of html | $(x)
         this.name = name // name of statistic
