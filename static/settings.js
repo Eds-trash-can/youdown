@@ -10,4 +10,9 @@ $(document).ready(() => {
     [{"type":"space"},{"type":"entry","name":"Home","icon":"/static/home.svg","link":"/"},{"type":"entry","name":"Last","icon":"/static/last.svg","link":"/last"},{"type":"entry","name":"New","icon":"/static/clock.svg","link":"/new"}]);
 
     $(".menu-toggle").click(() => menu.toggle())
+
+    //statistics:
+    st = {}
+    st.videocount = new stat(".videocount", "Videocount", 2000, {"url":"/stats-api/videocount","param":"videocount"}, "text")
+
 })
