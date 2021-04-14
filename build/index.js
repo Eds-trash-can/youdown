@@ -93,9 +93,11 @@ app.get('/watch/:video', function (req, res) {
         res.end();
     });
 });
-app.get('/channel-api/:channel', function (req, res) { channel_1.get_channel(req, res); });
-app.get('/video-api/:videoid', function (req, res) { video_1.get_video(req, res); });
-app.get('/stats-api/:stat', function (req, res) { video_1.video_statistics(req, res); });
+app.get('/channel-api/:channel', function (req, res) { channel_1.channel.get(req, res); });
+app.get('/video-api/:videoid', function (req, res) { video_1.video.get(req, res); });
+app.get('/stats-api/video/:stat', function (req, res) { video_1.video.statistics(req, res); });
+app.get('/stats-api/channel/:stat', function (req, res) { channel_1.channel.statistics(req, res); });
+app.get('/vid/:file', function (req, res) { return video_1.video.stream(req, res); });
 app.get('/img/:file', function (req, res) {
     console.log("[" + req.ip + "|0/0] img at: ./storadge/img/" + req.params.file);
     fs.readFile("./storadge/img/" + req.params.file, function (err, data) {
@@ -118,7 +120,6 @@ app.get('/img/:file', function (req, res) {
         }
     });
 });
-app.get('/vid/:file', function (req, res) { return video_1.video_stream(req, res); });
 app.get('/lib/:file', function (req, res) {
     fs.readFile('./static/lib/' + req.params.file, function (err, data) {
         if (err) {

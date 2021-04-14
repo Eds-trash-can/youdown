@@ -12,7 +12,7 @@
     <script src="/lib/videos.js"></script>
     <script src="/static/sidemenu.js"></script>
     <script src="/static/settings.js"></script>
-    <script src="/static/videoinfo.js"></script>
+    <script src="/lib/ytapi.js"></script>
     <script src="/static/statistics.js"></script>
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="/static/settings.css">
@@ -23,26 +23,34 @@
 
     <div class="main-area-container">
         <div class="stats-container">
-        <div class="stat-stripe">
-        <div class="videocount stat">
-                hi
-            </div></div>
+            <div class="stat-stripe stat-stripe-news">
+
+            </div>
+            <div class="stat-stripe stat-stripe-data">
+                <div class="stat videocount     " style="top:0.5em">Loading ...</div>
+                <div class="stat channelcount   " style="top:3em">Loading ...</div>
+                <div class="stat unique-platform" style="top:5.5em">Loading ...</div>
+                <div class="stat nth" style="top:8em">Loading ...</div>
+                <div class="stat nth" style="top:10.5em">Loading ...</div>
+            </div>
+            <div class="stat-stripe stat-stripe-ongoing">
+
+            </div>
         </div>
+        <div class="dark-startmenu-left settingsstartmenu"></div>
+        <div class="dimm-overlay"></div>
+        <div class="settingsmenu dark-sidemenu-left-extended"></div>
+        <div class="dark-menu-top">
+            <div class="menu-toggle-container">
+                <img src="/static/menu-white.png" class="menu-toggle">
+            </div>
+            <div class="logo-container">
+                <span class="logo">YouDown</span>
+            </div>
+        </div>
+        <div class="sidemenu dark-sidemenu-left-extended"></div>
+        <div class="startmenu dark-startmenu-left"></div>
     </div>
-    <div class="dark-startmenu-left settingsstartmenu"></div>
-    <div class="dimm-overlay"></div>
-    <div class="settingsmenu dark-sidemenu-left-extended"></div>
-    <div class="dark-menu-top">
-        <div class="menu-toggle-container">
-            <img src="/static/menu-white.png" class="menu-toggle">
-        </div>
-        <div class="logo-container">
-            <span class="logo">YouDown</span>
-        </div>
-    </div>
-    <div class="sidemenu dark-sidemenu-left-extended"></div>
-    <div class="startmenu dark-startmenu-left"></div>
-</div>
 </body>
 
 </html>

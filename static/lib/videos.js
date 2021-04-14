@@ -5,7 +5,7 @@ const recommended = new class {
     async getrecommended(i) {
         /* tmp i is count of videorecommendations*/
         /* fetch recomended video list array (ids => objects) */
-        let rickroll = { "thumbnail": "/img/Adc-_e45", "title": "Rick Astley - Never Gonna Give You Up (Video)", "description": `Rick Astley's official music video for “Never Gonna Give You Up” 
+        let rickroll = { "thumbnail": "/img/Adc-_e45.png", "title": "Rick Astley - Never Gonna Give You Up (Video)", "description": `Rick Astley's official music video for “Never Gonna Give You Up” 
         Listen to Rick Astley: https://RickAstley.lnk.to/_listenYD​
         
         Subscribe to the official Rick Astley YouTube channel: https://RickAstley.lnk.to/subscribeYD​

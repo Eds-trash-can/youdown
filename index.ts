@@ -1,9 +1,8 @@
 import express from 'express';
 import * as fs from 'fs';
 import * as bodyParser from 'body-parser'
-import { get_channel } from './channel';
-import { get_video, video_statistics, video_stream } from './video';
-import * as google from "googleapis";
+import { channel } from './channel';
+import { video } from './video';
 //import { user } from 'users';
 
 const app = express();
@@ -65,9 +64,11 @@ app.get('/watch/:video', (req, res) => {
     })
 })
 
-app.get('/channel-api/:channel', (req, res) => {get_channel(req, res)})
-app.get('/video-api/:videoid', (req, res) => {get_video(req, res)})
-app.get('/stats-api/:stat', (req, res) => {video_statistics(req, res)})
+app.get('/channel-api/:channel', (req, res) => {channel.get(req, res)})
+app.get('/video-api/:videoid', (req, res) => {video.get(req, res)})
+app.get('/stats-api/video/:stat', (req, res) => {video.statistics(req, res)})
+app.get('/stats-api/channel/:stat', (req, res) => {channel.statistics(req, res)})
+app.get('/vid/:file', (req, res) => video.stream(req, res));
 
 app.get('/img/:file', (req, res) => {
     console.log(`[${req.ip}|0/0] img at: ./storadge/img/${req.params.file}`)
@@ -89,7 +90,6 @@ app.get('/img/:file', (req, res) => {
         }
     }); 
 })
-app.get('/vid/:file', (req, res) => video_stream(req, res));
 
 app.get('/lib/:file', function(req, res) {
     fs.readFile('./static/lib/' + req.params.file, function(err, data) {
@@ -105,7 +105,6 @@ app.get('/lib/:file', function(req, res) {
         res.end();
     }); 
 });
-
 app.listen(PORT, () => { 
     console.log(`[SERVER]: running at http://localhost:${PORT}`)
 })

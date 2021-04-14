@@ -1,4 +1,4 @@
-ytapi = new class {
+var ytapi = new class {
   constructor() {
     fetch("/static/apikeys.json").then(data => {
       return data.json();
@@ -30,8 +30,9 @@ ytapi = new class {
   }
   async searchChannel(name, count) {
     return fetch(`https://www.googleapis.com/youtube/v3/search?key=${this.apis.google}&part=snippet&maxResults=${count}&q=${name}&type=channel`).then(data => {
-      return data.json()
-    })
+      return data.json().then((d) => {
+        return d.items
+      })})
   }
   async channelInfo(id) {
     return fetch(`https://www.googleapis.com/youtube/v3/channels?key=${this.apis.google}&part=snippet&id=${id}`).then(d => d.json()).then((d) => {

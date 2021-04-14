@@ -19,27 +19,50 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.get_channel = exports.channel = void 0;
+exports.channel = void 0;
 var fs = __importStar(require("fs"));
-var channel = /** @class */ (function () {
-    function channel() {
+exports.channel = new /** @class */ (function () {
+    function class_1() {
+        this.channeldata = {};
+        this.read();
     }
-    return channel;
-}());
-exports.channel = channel;
-function get_channel(req, res) {
-    console.log("[" + req.ip + "] Got channel " + req.params.channel);
-    fs.readFile('./storadge/channels.json', function (err, data) {
-        if (err) {
-            console.log("lul an error accured reading some random file! (No i wont tell u which but de error)");
-            console.log("Error: " + err);
-            res.status(404);
-            res.end("lul err!");
+    class_1.prototype.read = function () {
+        var _this = this;
+        fs.readFile('./storadge/channels.json', function (err, data) {
+            if (err) {
+                console.log("[WARNING] COULD NOT READ INITIAL CHANNEL-DATA");
+                console.log("[WARNING] BREAKING");
+                stop();
+            }
+            else {
+                _this.channeldata = JSON.parse(data.toString());
+            }
+        });
+    };
+    class_1.prototype.write = function () {
+        fs.writeFile('./storadge/channels.json', JSON.stringify(this.channeldata), function () {
+            console.log("[META] wrote channels.json");
+        });
+    };
+    class_1.prototype.get = function (req, res) {
+        console.log("[" + req.ip + "] Got channel " + req.params.channel);
+        if (this.channeldata[req.params.channel]) {
+            var d = this.channeldata[req.params.channel].toString();
+            res.end(JSON.stringify(d[req.params.channel]));
         }
         else {
-            var str = data.toString();
-            res.end(JSON.stringify(JSON.parse(str)[req.params.channel]));
+            res.status(404);
+            res.end(JSON.stringify({ "err": "channelnotfound" }));
         }
-    });
-}
-exports.get_channel = get_channel;
+    };
+    class_1.prototype.statistics = function (req, res) {
+        console.log("[" + req.ip + "] Got channel-stats of " + req.params.stat);
+        switch (req.params.stat) {
+            case "count":
+                res.send(JSON.stringify({ "channelcount": Object.keys(this.channeldata).length }));
+                break;
+        }
+        res.end("");
+    };
+    return class_1;
+}());
