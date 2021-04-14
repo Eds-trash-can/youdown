@@ -165,7 +165,6 @@ class videoplayer {
             $(".play-img").attr({"src": "/static/play.svg"})
             this.video[0].pause()
             this.mincntrls(20)
-            console.log("IS THIS SHIT BROKEN OR WHAT?")
         }
         return this.playing
     }
@@ -215,9 +214,9 @@ class videoplayer {
             percentage = 0;
         }
 
+        console.log(`calculated seek to ${maxduration * percentage / 100}`)
         $(".timebar-progress").css("width", percentage+"%");
         this.seek(maxduration * percentage / 100)
-        console.log(maxduration * percentage / 100)
     }
     volume(v) {// api function for volume (also cookies)
         if(!v & getCookie("volume") == "") {
