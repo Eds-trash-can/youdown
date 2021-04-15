@@ -59,7 +59,7 @@ class sidemenu {
                 case "topic":
                     html += `<div style="top: ${top}em" class="text-entry">
                         <div class="text-entry-container">
-                            <span class="text-entry-text">${content[i].text.toUpperCase()}</span>
+                            <span class="text-entry-text">${content[i].text}</span>
                         </div>
                     </div>`
                     top += 3   

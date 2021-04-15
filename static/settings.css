@@ -40,3 +40,21 @@
 .nth {
     visibility: hidden;
 }
+.dwd-extend {
+    color: #000;
+    position: absolute;
+    text-align: center;
+    border-radius: 50%;
+    height: 1em;
+    width: 1em;
+    left: 6.5em;
+    background-color: #444;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+.dwd {
+    position: absolute;
+    left: 1em;
+}
