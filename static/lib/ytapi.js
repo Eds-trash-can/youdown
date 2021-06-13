@@ -28,10 +28,13 @@ var ytapi = new class {
     }
     return tkn2
   }
-  async searchChannel(name, count) {
-    return fetch(`https://www.googleapis.com/youtube/v3/search?key=${this.apis.google}&part=snippet&maxResults=${count}&q=${name}&type=channel`).then(data => {
-      return data.json().then((d) => {
-        return d.items
+  async search(type, queue, count) {
+  	if(!(["channel", "playlist", "video"].includes(type))) {
+		return new Error("No type was specified! aborting")
+  	}
+    return fetch(`https://www.googleapis.com/youtube/v3/search?key=${this.apis.google}&part=snippet&maxResults=${count}&q=${queue}&type=${type}`).then(data => {
+      return data.json().then((data) => {
+        return data.items
       })})
   }
   async channelInfo(id) {

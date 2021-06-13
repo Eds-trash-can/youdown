@@ -60,7 +60,7 @@ html, body
 }
 .main-area-container {
     position: absolute;
-    height: 100em;
+    height: calc( 100% - 5em );
     width: calc(100% - 3em);
     top: 3em;
     margin-left: auto;

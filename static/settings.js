@@ -1,36 +1,14 @@
-var dwd_extend = new class {
-    constructor() {
-        this.toggle(true)
-        this.toggle()
-        this.toggle()
-    }
-    toggle(i) {
-        if(typeof this.status == "undefined") {
-            this.status = !this.status
-        } else {
-            this.status = i
-        }
-        this.dostuff()
-    }
-    dostuff() {
-        if(this.status) {
-            $(".dwd").attr({"style":"visibility: visible"})
-            $(".dwd-extend").html("/\\")
-        } else {
-            $(".dwd").attr({"style":"visibility: hidden"})
-            $(".dwd-extend").html("\\/")
-        }
-    }
-
-}
+var dwd_extend = new extendmenu() //pls fix im to lazy...
 
 $(document).ready(() => {
    settingsmenu = new sidemenu(".settingsmenu", "settingsstartmenu", "",
-    [{"type":"sentry","name":"Overview","link":"/settings/"},
-    {"type":"topic","text":"CONTENT"},
-    {"type":"sentry","name":"","link":"/last"},
-    {"type":"sentry","name":"New","link":"/new"},    {"type":"topic","text":"GET FROM x <span class=\"dwd-extend clickable\">/\\</span>"},
-    {"type":"sentry","name":"<span class=\"dwd\">New</span>","link":"/new"}
+    [{"type":"sentry",    "name":"Overview", "link":"/settings/"},
+    {"type":"topic",      "text":"CONTENT"}, 
+    {"type":"sentry",     "name":"General",  "link":"/last"},
+    {"type":"sentry",     "name":"New",      "link":"/new"},    
+    {"type":"topic",      "text":"ADD FROM x <span class=\"dwd-extend clickable\">/\\</span>"},
+    {"type":"collapsable","name":"Files",    "link":"/settings/files"},
+    {"type":"collapsable","name":"YouTube",  "link":"/settings/yt"}
 ], true);
     menu = new sidemenu(".sidemenu", ".dimm-overlay", "",[
         {"type":"space"},
@@ -42,8 +20,4 @@ $(document).ready(() => {
     $(".menu-toggle").click(() => menu.toggle())
     $(".dwd-extend").click(() => dwd_extend.toggle())
 
-    //statistics:
-    st = {}
-    st.videocount = new stat(".videocount",   "Videocount", 2000, {"url":"/stats-api/video/count"  ,"param":"videocount"},   "text")
-    st.channelcnt = new stat(".channelcount", "Channels",  2000, {"url":"/stats-api/channel/count","param":"channelcount"}, "text")
 })

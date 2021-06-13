@@ -106,5 +106,5 @@ app.get('/lib/:file', function(req, res) {
     }); 
 });
 app.listen(PORT, () => { 
-    console.log(`[SERVER]: running at http://localhost:${PORT}`)
+    console.log(`[SERVER]: running at http://localhost:${PORT}, http://[::1]:${PORT} or http://127.0.0.1:${PORT}`)
 })
