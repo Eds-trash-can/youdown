@@ -24,7 +24,8 @@ Random stuff:
 
 # TODO: 
 
-The trello board: https://trello.com/b/RlMFODZb/youdown (outdated af)
+The trello board: https://trello.com/b/RlMFODZb/youdown (outdated af no rly it dosnt even contain half the things implemented or WIPs)
+if you actually want to know whats WIP and whats planned look in code files stuff like static/lib/* these files contain decent dokumentation. (at least i think so)
 
 # but why?
 

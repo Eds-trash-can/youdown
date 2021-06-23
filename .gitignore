@@ -1,5 +1,7 @@
-node_modules/
-build/
+node_modules/*
+build/*
 storadge/img/*
 storadge/vid/*
 google-api-key
+api-keys.json
+log.txt
