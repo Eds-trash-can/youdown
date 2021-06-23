@@ -26,6 +26,7 @@ var express_1 = __importDefault(require("express"));
 var fs = __importStar(require("fs"));
 var channel_1 = require("./channel");
 var video_1 = require("./video");
+var secure_1 = require("./secure");
 //import { user } from 'users';
 var app = express_1.default();
 var PORT = 8080;
@@ -98,6 +99,7 @@ app.get('/video-api/:videoid', function (req, res) { video_1.video.get(req, res)
 app.get('/stats-api/video/:stat', function (req, res) { video_1.video.statistics(req, res); });
 app.get('/stats-api/channel/:stat', function (req, res) { channel_1.channel.statistics(req, res); });
 app.get('/vid/:file', function (req, res) { return video_1.video.stream(req, res); });
+app.get('/api/:api', function (req, res) { return secure_1.secure.apiMGR(req, res); });
 app.get('/img/:file', function (req, res) {
     console.log("[" + req.ip + "|0/0] img at: ./storadge/img/" + req.params.file);
     fs.readFile("./storadge/img/" + req.params.file, function (err, data) {
@@ -134,6 +136,6 @@ app.get('/lib/:file', function (req, res) {
         res.end();
     });
 });
-app.listen(PORT, function () {
-    console.log("[SERVER]: running at http://localhost:" + PORT);
+var server = app.listen(PORT, function () {
+    console.log("[SERVER]: running at http://localhost:" + PORT + ", http://[::1]:" + PORT + " or http://127.0.0.1:" + PORT);
 });

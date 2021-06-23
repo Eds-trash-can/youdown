@@ -147,6 +147,7 @@
 	top: calc( 20% );
 
 	overflow-y: scroll;
+	overflow-x: hidden;
 
 	padding: 1em;
 
@@ -163,5 +164,22 @@
 	background-color: #414141;
 
 	padding: .2em;
-	border-radius: 50%
+	border-radius: 50%;
+}
+
+.stat.text {
+	position: relative;
+	background-color: #414141;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 1.2em;
+
+	padding: 0.5em;
+	top: 2em;
+
+	border-bottom-color: black;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+.page-stripe.stat-stripe {
 }

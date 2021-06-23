@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import * as bodyParser from 'body-parser'
 import { channel } from './channel';
 import { video } from './video';
+import { secure } from './secure';
 //import { user } from 'users';
 
 const app = express();
@@ -69,6 +70,7 @@ app.get('/video-api/:videoid', (req, res) => {video.get(req, res)})
 app.get('/stats-api/video/:stat', (req, res) => {video.statistics(req, res)})
 app.get('/stats-api/channel/:stat', (req, res) => {channel.statistics(req, res)})
 app.get('/vid/:file', (req, res) => video.stream(req, res));
+app.get('/api/:api', (req, res) => secure.apiMGR(req, res));
 
 app.get('/img/:file', (req, res) => {
     console.log(`[${req.ip}|0/0] img at: ./storadge/img/${req.params.file}`)
@@ -105,6 +107,6 @@ app.get('/lib/:file', function(req, res) {
         res.end();
     }); 
 });
-app.listen(PORT, () => { 
+const server = app.listen(PORT, () => { 
     console.log(`[SERVER]: running at http://localhost:${PORT}, http://[::1]:${PORT} or http://127.0.0.1:${PORT}`)
 })

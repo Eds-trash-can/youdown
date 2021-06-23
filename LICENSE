@@ -1,5 +1,23 @@
+	+-------------------+
+	| ALWAYS USE NEWEST |
+	| VERSION OF THIS   |
+	|     FILE!         |
+	+-------------------+
+	
 
-- always use the lastest LICENSE-filegist (newest in the master branch)
-- changing license is always allowed by the main maintainer (at the moment: "DerZombiiie")
 
-just immagine GPLv3 here
+until version r2.0.0 (meaning "Release 2.0.0")
+ - DO NOT DISTRIBUTE WITHOUT MEANSONING THE ORIGINAL
+ - DO CHANGE THE NAME OF PROJECT IF YOU CHANGE SOMETHING (e.g: ur named "username" u can name it "usernames' YouDown" or sth like that just differentiate the name of the project from mine)
+- always use the lastest LICENSE-file (newest in the master branch)
+- changing license is always allowed by the main maintainer and trusted individuals (at the moment: "DerZombiiie", "Fleckenstein")
+
+
+after (and including) version  r2.0.0 (meading "Release 2.0.0")
+- changing license is always allowed by the main maintainer and trusted individuals (at the moment: "DerZombiiie", "Fleckenstein")
+- its licensed under GPL v3
+- exeptions (being prefered over GPL):
+- if u (for whatever reason) want to encorporate this into a commercial product please first ask me for permission me at derz@elidragon.com
+
+For all other cases its based on:
+-*just immagine GPLv3 here*-

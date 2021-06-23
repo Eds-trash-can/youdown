@@ -4,8 +4,8 @@ class stat { //hi
         this.name = name // name of statistic
         this.api  = api // api endpoint object
         this.type = type.toLowerCase() // type of statistic
-            //available: text, img
-            // WIP: graph
+            //available: text
+            // WIP: graph, img
             //planned:   diagramm; percentage
 
 			// text:
