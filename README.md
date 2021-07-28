@@ -1,3 +1,5 @@
+# DISCONTINUED! cuz i found out about kodi
+
 # YouDown - youtube like media interface
 
 Please keep in mind this is an early WIP
